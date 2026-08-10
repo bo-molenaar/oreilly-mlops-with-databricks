@@ -16,9 +16,11 @@ cfg = ProjectConfig.from_yaml(
     config_path=f"{args.root_path}/files/project_config.yml", env=args.env
 )
 
-model_name = f"{cfg.catalog}.{cfg.schema}.hotel_booking_basic"
+model_name = f"{cfg.catalog}.{cfg.schema}.hotel_booking_pyfunc"
+wrapped_model_name = f"{cfg.catalog}.{cfg.schema}.hotel_booking_basic"
+
 wrapped_model_info = mlflow.models.get_model_info(
-    model_uri=f"models:/{model_name}/{model_version}"
+    model_uri=f"models:/{wrapped_model_name}/{model_version}"
 )
 
 wrapper = HotelBookingModelWrapper()
