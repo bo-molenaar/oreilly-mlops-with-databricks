@@ -9,18 +9,16 @@ resources:
       tags:
         project: "hotel-booking"
 
-      job_clusters:
-        - job_cluster_key: "hotel-booking-cluster"
-          new_cluster:
-            spark_version: "17.3.x-scala2.13"
-            data_security_mode: "SINGLE_USER"
-            node_type_id: "Standard_DS3_v2" #"r3.xlarge"
-            driver_node_type_id: "Standard_DS3_v2" #"r3.xlarge"
-            num_workers: 1
+      environments:
+        - environment_key: "serverless"
+          spec:
+            client: "1"
+            dependencies:
+              - whl: ../dist/*.whl
 
       tasks:
         - task_key: "refresh_monitor_table"
-          job_cluster_key: "hotel-booking-cluster"
+          environment_key: "serverless"
           spark_python_task:
             python_file: "../scripts/refresh_monitor.py"
             parameters:
@@ -29,5 +27,3 @@ resources:
               - "${workspace.root_path}"
               - "--env"
               - "${bundle.target}"
-          libraries:
-           - whl: ../dist/*.whl
