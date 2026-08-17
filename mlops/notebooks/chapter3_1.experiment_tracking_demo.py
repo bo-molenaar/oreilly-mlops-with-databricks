@@ -10,7 +10,7 @@ mlflow.get_tracking_uri()
 # COMMAND ----------
 experiment = mlflow.set_experiment(experiment_name="/Shared/demo")
 mlflow.set_experiment_tags(
-    {"repository_name": "mvechtomova/oreilly-mlops-with-databricks"}
+    {"repository_name": "bo-molenaar/oreilly-mlops-with-databricks"}
 )
 print(experiment)
 # COMMAND ----------
@@ -29,7 +29,7 @@ mlflow.get_experiment(experiment.experiment_id)
 # COMMAND ----------
 # search for experiment
 experiments = mlflow.search_experiments(
-    filter_string="tags.repository_name='mvechtomova/oreilly-mlops-with-databricks'"
+    filter_string="tags.repository_name='bo-molenaar/oreilly-mlops-with-databricks'"
 )
 print(experiments)
 
